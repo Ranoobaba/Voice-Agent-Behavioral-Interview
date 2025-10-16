@@ -139,18 +139,27 @@ test_queries()
 # %%
 import numpy as np
 import sounddevice as sd
-from agents.voice import AudioInput, SingleAgentVoiceWorkflow, VoicePipeline
+from agents.voice import AudioInput, SingleAgentVoiceWorkflow, VoicePipeline, TTSModelSettings, VoicePipelineConfig
 
 def voice_assistant():
     import asyncio
 
+    # Voice settings for behavioral interviewer
+    interviewer_voice_settings = TTSModelSettings(
+        instructions=(
+            "Voice Affect: Calm, composed, and reassuring; project quiet authority and confidence. "
+            "Tone: Sincere, empathetic, and gently authoritative—express genuine apology while conveying competence. "
+            "Pacing: Steady and moderate; unhurried enough to communicate care, yet efficient enough to demonstrate professionalism."
+        )
+    )
 
     async def run_voice():
         input_samplerate = sd.query_devices(kind='input')['default_samplerate']
         output_samplerate = 24000  # Standard OpenAI TTS sample rate
+        voice_config = VoicePipelineConfig(tts_settings=interviewer_voice_settings)
 
         while True:
-            pipeline = VoicePipeline(workflow=SingleAgentVoiceWorkflow(knowledge_agent))
+            pipeline = VoicePipeline(workflow=SingleAgentVoiceWorkflow(knowledge_agent), config=voice_config)
 
             # Check for input to either provide voice or exit
             cmd = input("Press Enter to speak your query (or type 'esc' to exit): ")
