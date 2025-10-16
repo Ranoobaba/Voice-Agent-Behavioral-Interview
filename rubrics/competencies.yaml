@@ -1,0 +1,185 @@
+# Behavioral Interview Competencies Rubric
+# For evaluating engineering candidates using the STAR method
+# Scoring Scale: 1-5 (1=Poor, 2=Below Average, 3=Average, 4=Good, 5=Excellent)
+
+competencies:
+  - name: "Problem Solving & Analytical Thinking"
+    description: "Ability to identify problems, analyze situations, and develop effective solutions"
+    key_behaviors:
+      - "Breaks down complex problems into manageable parts"
+      - "Uses data and logic to inform decisions"
+      - "Considers multiple solutions before selecting the best approach"
+      - "Learns from past experiences to improve future problem-solving"
+    star_evaluation_criteria:
+      situation: "Clear description of the problem context and constraints"
+      task: "Specific objective or challenge that needed to be addressed"
+      action: "Logical, methodical approach taken to solve the problem"
+      result: "Measurable outcome and lessons learned"
+    scoring_guide:
+      1: "Vague problem description, no clear analytical approach, poor outcome"
+      2: "Basic problem identification, limited analysis, minimal positive results"
+      3: "Adequate problem-solving with some analytical thinking, reasonable outcome"
+      4: "Strong analytical approach, well-reasoned solution, good results"
+      5: "Exceptional problem-solving with deep analysis, innovative solution, outstanding results"
+
+  - name: "Teamwork & Collaboration"
+    description: "Ability to work effectively with others toward common goals"
+    key_behaviors:
+      - "Communicates openly and respectfully with team members"
+      - "Contributes fairly to team efforts"
+      - "Supports and helps colleagues when needed"
+      - "Handles conflicts constructively"
+    star_evaluation_criteria:
+      situation: "Clear team context and dynamics"
+      task: "Team goal or collaborative challenge"
+      action: "Specific contributions and interactions with team members"
+      result: "Team outcome and relationship quality"
+    scoring_guide:
+      1: "Poor team player, creates conflict, minimal contribution"
+      2: "Limited collaboration, basic contribution, some team friction"
+      3: "Adequate team member, fair contribution, maintains positive relationships"
+      4: "Strong collaborator, significant contribution, enhances team dynamics"
+      5: "Exceptional team player, outstanding contribution, elevates entire team performance"
+
+  - name: "Communication Skills"
+    description: "Ability to convey information clearly and listen effectively"
+    key_behaviors:
+      - "Explains technical concepts to diverse audiences"
+      - "Listens actively and asks clarifying questions"
+      - "Adapts communication style to the audience"
+      - "Provides and receives feedback constructively"
+    star_evaluation_criteria:
+      situation: "Communication context and audience"
+      task: "What needed to be communicated and why"
+      action: "How the message was delivered and received"
+      result: "Impact of the communication on the outcome"
+    scoring_guide:
+      1: "Unclear communication, poor listening, messages frequently misunderstood"
+      2: "Basic communication with some clarity issues, limited adaptability"
+      3: "Clear communication in most situations, reasonable listening skills"
+      4: "Strong communicator across various contexts, excellent listener"
+      5: "Exceptional communication skills, adapts masterfully to any audience"
+
+  - name: "Leadership & Initiative"
+    description: "Ability to take charge, motivate others, and drive projects forward"
+    key_behaviors:
+      - "Takes ownership of tasks and projects"
+      - "Proactively identifies opportunities for improvement"
+      - "Motivates and influences others positively"
+      - "Makes decisions and takes responsibility for outcomes"
+    star_evaluation_criteria:
+      situation: "Context requiring leadership or initiative"
+      task: "What needed to be accomplished or improved"
+      action: "How they took charge and influenced others"
+      result: "Impact on project and team"
+    scoring_guide:
+      1: "Passive, avoids responsibility, no initiative shown"
+      2: "Occasional initiative, limited leadership impact"
+      3: "Takes initiative when needed, adequate leadership in familiar situations"
+      4: "Strong initiative, effective leader in various situations"
+      5: "Exceptional leadership, consistently drives positive change and inspires others"
+
+  - name: "Adaptability & Learning Agility"
+    description: "Ability to adjust to new situations and learn quickly"
+    key_behaviors:
+      - "Remains effective when facing ambiguity or change"
+      - "Learns quickly from experience and feedback"
+      - "Adjusts approach when initial plans don't work"
+      - "Seeks out new knowledge and skills proactively"
+    star_evaluation_criteria:
+      situation: "Description of change or unfamiliar situation"
+      task: "What needed to be learned or adapted to"
+      action: "How they approached the learning or adaptation process"
+      result: "Success in the new situation and skills gained"
+    scoring_guide:
+      1: "Struggles with change, slow to adapt, resistant to new approaches"
+      2: "Adapts with difficulty, slow learning curve"
+      3: "Handles change adequately, learns at reasonable pace"
+      4: "Adapts well to change, learns quickly, embraces new challenges"
+      5: "Thrives in change, exceptional learning agility, transforms challenges into opportunities"
+
+  - name: "Time Management & Organization"
+    description: "Ability to prioritize tasks and manage workload effectively"
+    key_behaviors:
+      - "Prioritizes tasks based on importance and deadlines"
+      - "Plans and organizes work systematically"
+      - "Meets deadlines consistently"
+      - "Balances multiple responsibilities effectively"
+    star_evaluation_criteria:
+      situation: "Context with competing demands or time pressure"
+      task: "What needed to be accomplished within constraints"
+      action: "How they organized and prioritized their work"
+      result: "Quality of deliverables and timeliness"
+    scoring_guide:
+      1: "Poor planning, misses deadlines, disorganized approach"
+      2: "Basic organization, occasionally misses deadlines, struggles with priorities"
+      3: "Adequate time management, usually meets deadlines, reasonable organization"
+      4: "Strong organization, consistently meets deadlines, prioritizes effectively"
+      5: "Exceptional time management, exceeds expectations, masterful prioritization"
+
+  - name: "Resilience & Handling Pressure"
+    description: "Ability to maintain performance under stress and recover from setbacks"
+    key_behaviors:
+      - "Stays calm and focused under pressure"
+      - "Bounces back from failures or disappointments"
+      - "Maintains positive attitude during challenges"
+      - "Uses stress as motivation rather than becoming overwhelmed"
+    star_evaluation_criteria:
+      situation: "Description of stressful or challenging circumstances"
+      task: "What needed to be accomplished despite difficulties"
+      action: "How they managed stress and maintained performance"
+      result: "Outcome despite challenges and personal growth"
+    scoring_guide:
+      1: "Unable to handle pressure, gives up easily, negative attitude during stress"
+      2: "Struggles under pressure, slow to recover from setbacks"
+      3: "Handles typical pressure adequately, recovers from most setbacks"
+      4: "Performs well under pressure, bounces back quickly from failures"
+      5: "Thrives under pressure, exceptional resilience, inspires others during difficult times"
+
+  - name: "Ethics & Integrity"
+    description: "Ability to act according to ethical principles and professional standards"
+    key_behaviors:
+      - "Makes honest and transparent decisions"
+      - "Takes responsibility for mistakes"
+      - "Respects confidentiality and intellectual property"
+      - "Speaks up when ethical concerns arise"
+    star_evaluation_criteria:
+      situation: "Context involving ethical considerations or difficult choices"
+      task: "What decision or action needed to be taken"
+      action: "How they handled the ethical dimension"
+      result: "Outcome and impact of their ethical stance"
+    scoring_guide:
+      1: "Shows poor judgment, avoids responsibility, questionable ethics"
+      2: "Basic ethical awareness, sometimes avoids difficult ethical choices"
+      3: "Generally acts with integrity, makes ethical choices in clear situations"
+      4: "Strong ethical compass, consistently demonstrates integrity"
+      5: "Exceptional integrity, proactively addresses ethical issues, role model for others"
+
+# Interview Guidelines for AI Assistant
+interview_guidelines:
+  question_approach:
+    - "Ask open-ended questions that require STAR-formatted responses"
+    - "Allow candidate to fully describe their experience before probing"
+    - "Use follow-up questions to clarify missing STAR elements"
+    - "Focus on specific examples, not hypothetical situations"
+
+  probing_questions:
+    - "Can you tell me more about the situation/context?"
+    - "What specifically was your role versus others' roles?"
+    - "What were you thinking when you made that decision?"
+    - "What was the outcome? How did you measure success?"
+    - "What would you do differently if you faced this situation again?"
+
+  red_flags:
+    - "Candidate takes credit for team accomplishments without acknowledging others"
+    - "Unable to provide specific examples (only speaks hypothetically)"
+    - "Blames others for failures without acknowledging own role"
+    - "Cannot articulate lessons learned or self-reflection"
+    - "Inconsistent or vague details when probed"
+
+  evaluation_best_practices:
+    - "Score each competency independently"
+    - "Provide specific qualitative notes referencing the candidate's STAR response"
+    - "Look for patterns across multiple responses"
+    - "Consider cultural differences in communication styles"
+    - "Focus on behaviors and outcomes, not personality"
