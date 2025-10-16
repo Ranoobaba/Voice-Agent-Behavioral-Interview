@@ -11,6 +11,16 @@ from agents.extensions.handoff_prompt import prompt_with_handoff_instructions
 api_key = os.getenv("OPENAI_API_KEY")
 set_default_openai_key(api_key)
 
+# Common system prompt for voice output best practices:
+voice_system_prompt = """
+[Output Structure]
+Your output will be delivered in an audio voice response, please ensure that every response meets these guidelines:
+1. Use a friendly, human tone that will sound natural when spoken aloud.
+2. Keep responses short and segmented—ideally one to two concise sentences per step.
+3. Avoid technical jargon; use plain language so that instructions are easy to understand.
+4. Provide only essential details so as not to overwhelm the listener.
+"""
+
 # --- Agent: Search Agent ---
 search_agent = Agent(
     name="SearchAgent",
@@ -75,16 +85,17 @@ print(results)
 # --- Agent: Knowledge Agent ---
 knowledge_agent = Agent(
     name="KnowledgeAgent",
-    instructions=(
+    instructions=voice_system_prompt + (
         "You are an AI behavioral interviewer for engineering candidates. "
         "Use the FileSearchTool to access competency rubrics, job descriptions, and company values. "
-        "Ask STAR-method questions (Situation, Task, Action, Result) to evaluate behavioral competencies. "
-        "Evaluate responses using the 1-5 scoring rubric provided in the competencies file. "
-        "Focus on: problem-solving, teamwork, communication, leadership, adaptability, "
-        "time management, resilience, and ethics. Be conversational and encouraging."
+        "Ask behavioral questions naturally and conversationally. Focus on: problem-solving, teamwork, "
+        "communication, leadership, adaptability, time management, resilience, and ethics. "
+        "When evaluating candidate responses, internally assess them using the STAR method "
+        "(Situation, Task, Action, Result) and the 1-5 scoring rubric from the competencies file. "
+        "Do not mention STAR or scoring to the candidate. Be encouraging and supportive."
     ),
     tools=[FileSearchTool(
-            max_num_results=3,
+            max_num_results=2,
             vector_store_ids=[vector_store_id],
         ),],
 )
@@ -110,8 +121,8 @@ def test_queries():
     async def run_tests():
         examples = [
             "Hi, I want to practice for a behavioral interview for a mechanical engineering internship", # Knowledge Agent test
-            "Can you ask me a teamwork question?", # Knowledge Agent test
-            "What are the latest trends in engineering interviews for 2024?", # Search Agent test
+            "How do I answer a Tell me about yourself question?", # Knowledge Agent test
+            "What are the behavioural questions that are asked in the tesla interview", # Search Agent test
         ]
         with trace("Vectorly Interview Assistant"):
             for query in examples:
@@ -124,3 +135,60 @@ def test_queries():
 
 # Run the tests
 test_queries()
+
+# %%
+import numpy as np
+import sounddevice as sd
+from agents.voice import AudioInput, SingleAgentVoiceWorkflow, VoicePipeline
+
+def voice_assistant():
+    import asyncio
+
+
+    async def run_voice():
+        input_samplerate = sd.query_devices(kind='input')['default_samplerate']
+        output_samplerate = 24000  # Standard OpenAI TTS sample rate
+
+        while True:
+            pipeline = VoicePipeline(workflow=SingleAgentVoiceWorkflow(knowledge_agent))
+
+            # Check for input to either provide voice or exit
+            cmd = input("Press Enter to speak your query (or type 'esc' to exit): ")
+            if cmd.lower() == "esc":
+                print("Exiting...")
+                break
+            print("Listening...")
+            recorded_chunks = []
+
+             # Start streaming from microphone until Enter is pressed
+            with sd.InputStream(samplerate=input_samplerate, channels=1, dtype='int16', callback=lambda indata, frames, time, status: recorded_chunks.append(indata.copy())):
+                input()
+
+            # Concatenate chunks into single buffer
+            recording = np.concatenate(recorded_chunks, axis=0)
+
+            # Input the buffer and await the result
+            audio_input = AudioInput(buffer=recording)
+
+            with trace("Vectorly Interview Voice Assistant"):
+                result = await pipeline.run(audio_input)
+
+             # Transfer the streamed result into chunks of audio
+            response_chunks = []
+            async for event in result.stream():
+                if event.type == "voice_stream_event_audio":
+                    response_chunks.append(event.data)
+
+            response_audio = np.concatenate(response_chunks, axis=0)
+
+            # Play response
+            print("Assistant is responding...")
+            sd.play(response_audio, samplerate=output_samplerate)
+            sd.wait()
+            print("---")
+
+    asyncio.run(run_voice())
+
+# Run the voice assistant
+voice_assistant()
+
