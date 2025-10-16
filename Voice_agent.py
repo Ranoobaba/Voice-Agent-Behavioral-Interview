@@ -88,3 +88,39 @@ knowledge_agent = Agent(
             vector_store_ids=[vector_store_id],
         ),],
 )
+# --- Agent: Triage Agent ---
+triage_agent = Agent(
+    name="Assistant",
+    instructions=prompt_with_handoff_instructions("""
+You are the virtual assistant for Vectorly's behavioral interview practice platform.
+Welcome engineering candidates and help them practice for behavioral interviews.
+
+Based on the user's intent, route to:
+- KnowledgeAgent to conduct behavioral interview practice using STAR method
+- SearchAgent for current information about interview best practices or companies
+"""),
+    handoffs=[knowledge_agent, search_agent],
+)
+
+from agents import Runner, trace
+
+def test_queries():
+    import asyncio
+
+    async def run_tests():
+        examples = [
+            "Hi, I want to practice for a behavioral interview for a mechanical engineering internship", # Knowledge Agent test
+            "Can you ask me a teamwork question?", # Knowledge Agent test
+            "What are the latest trends in engineering interviews for 2024?", # Search Agent test
+        ]
+        with trace("Vectorly Interview Assistant"):
+            for query in examples:
+                result = await Runner.run(triage_agent, query)
+                print(f"User: {query}")
+                print(result.final_output)
+                print("---")
+
+    asyncio.run(run_tests())
+
+# Run the tests
+test_queries()
