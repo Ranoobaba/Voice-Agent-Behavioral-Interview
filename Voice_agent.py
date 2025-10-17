@@ -115,7 +115,7 @@ knowledge_agent = Agent(
         "Remember: Be encouraging, supportive, and maintain a professional yet warm tone throughout."
     ),
     tools=[FileSearchTool(
-            max_num_results=2,
+            max_num_results=1,
             vector_store_ids=[vector_store_id],
         ),],
 )
